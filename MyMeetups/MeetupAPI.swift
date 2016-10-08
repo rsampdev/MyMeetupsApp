@@ -47,7 +47,7 @@ struct MeetupAPI {
         var jsonData = [String: AnyObject]()
         
         do {
-            try jsonData  = JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions(rawValue: UInt(0))) as! [String: AnyObject]
+            try jsonData  = JSONSerialization.jsonObject(with: data, options: []) as! [String: AnyObject]
         } catch let error {
             print(error)
         }

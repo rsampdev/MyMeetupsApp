@@ -12,10 +12,11 @@ import CoreData
 internal class City: NSManagedObject {
     
     required convenience init?(json: [String:Any], context: NSManagedObjectContext) {
-        guard let jsonName = json["city"] as! String?,
-              let jsonID = json["id"] as! NSNumber?,
-              let jsonCountryName = json["localized_country_name"] as! String?,
-              let jsonMemberCount = json["member_count"] as! NSNumber? else {
+        guard let jsonName = json["city"] as? String,
+              let jsonID = json["id"] as? NSNumber,
+              let jsonCountryName = json["localized_country_name"] as? String,
+              let jsonMemberCount = json["member_count"] as? NSNumber,
+              let jsonState = json["state"] as? String else {
             return nil
         }
         
@@ -25,10 +26,7 @@ internal class City: NSManagedObject {
         id = jsonID.int64Value
         countryName = jsonCountryName
         memberCount = jsonMemberCount.int64Value
-        
-        if let state = json["state"] as? String {
-            self.state = state
-        }
+        state = jsonState
     }
     
     public override func awakeFromInsert() {
